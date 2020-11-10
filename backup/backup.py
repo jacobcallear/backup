@@ -11,8 +11,10 @@ class Backup:
     '''Describe a folder you want to back up.'''
     def __init__(self, folder):
         folder = Path(folder).resolve()
-        if not folder.is_dir():
+        if not folder.exists():
             raise FileNotFoundError(folder)
+        if not folder.is_dir():
+            raise NotADirectoryError(folder)
         self.path = Path(folder)
 
     def __repr__(self):
