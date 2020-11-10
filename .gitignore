@@ -1,0 +1,5 @@
+# Top-level directories
+/.vscode/
+/venv/
+# Directories
+__pycache__/
