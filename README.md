@@ -1,5 +1,7 @@
 # Backup
 
+![Python tests and lints status](https://github.com/jacobcallear/backup/workflows/tests/badge.svg)
+
 Backup folders using python.
 
 ## Demo
