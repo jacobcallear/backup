@@ -49,3 +49,25 @@ class Backup:
                     print(f'Copying file "{folder / file_name}"')
                     print(f'          to "{expected_file_path}"')
                     shutil.copy(folder / file_name, expected_file_path)
+
+    def delete_missing_from(self, folder):
+        '''Deletes files in `folder` that are not in `self.path`.'''
+        folder = Path(folder)
+        if not folder.exists():
+            raise FileNotFoundError(folder)
+        for folder_path, subfolders, file_names in walk(folder):
+            folder_path = Path(folder_path)
+            expected_folder_path = self.path / folder_path.relative_to(folder)
+            if not expected_folder_path.exists():
+                # Delete folder if it doesn't exist in `self.path`
+                print(f'Deleting folder "{folder_path}"')
+                shutil.rmtree(folder_path)
+                subfolders[:] = []
+                continue
+            # Delete files if they don't exist in `self.path`
+            for file_name in file_names:
+                expected_file_path = expected_folder_path / file_name
+                if not expected_file_path.exists():
+                    file_to_delete = folder_path / file_name
+                    print(f'Deleting file "{file_to_delete}"')
+                    file_to_delete.unlink()
