@@ -35,12 +35,15 @@ def test_backup_repr(monkeypatch):
     # Pretend path exists and is directory to allow initialisation
     monkeypatch.setattr(Path, 'is_dir', lambda _: True)
     monkeypatch.setattr(Path, 'exists', lambda _: True)
-    # 
-    given_path = 'example/string'
+    # Get absolute path from current working directory to allow tests on
+    # different platforms
+    cwd = Path.cwd()
+    given_path = cwd / 'example/string'
     expected_reprs = (
-        "Backup(path='example/string')",
-        "Backup(path='example\\string')"
+        f"Backup(path='{cwd}/example/string')",
+        f"Backup(path='{cwd}\\example\\string')"
     )
+    # Act, assert
     actual_repr = str(Backup(given_path))
     assert actual_repr in expected_reprs
 
