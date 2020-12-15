@@ -1,6 +1,5 @@
 '''Backup folders.
 TODO
-- Add `delete_missing_from()` method
 - Add `to_json()` method
 '''
 from os import walk
