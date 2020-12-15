@@ -1,4 +1,11 @@
-'''Test Backup class.'''
+'''Test Backup class.
+
+Tests the following methods:
+
+- `__init__`
+- `__repr__`
+
+'''
 from pathlib import Path
 
 import pytest
