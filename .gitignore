@@ -3,3 +3,4 @@
 /venv/
 # Directories
 __pycache__/
+*.egg-info/
